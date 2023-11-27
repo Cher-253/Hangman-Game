@@ -1,0 +1,6 @@
+
+char *PhraseBank[] = {"Show me the money","Just keep swimming", "Why so serious?","May the Force be with you", "E T phone home", "Bond James Bond.", "Keep your friends close, but your enemies closer", "Elementary, my dear Watson", "You're gonna need a bigger boat", "I'm king of the world!", ""};
+ 
+
+
+
