@@ -16,7 +16,7 @@ GameLib.h:
 Header file providing function prototypes and necessary constants for the Hangman game.
 Defines the maximum input size, the maximum number of allowed strikes, and includes function prototypes for the game's functionality.
 
-Key Features:
+Key Features:  
 --> Randomly selects a phrase for the Hangman game from a predefined phrase bank.  
 --> Converts the chosen phrase into a dashed format for display.  
 --> Allows users to guess letters and updates the display based on correct guesses.  
