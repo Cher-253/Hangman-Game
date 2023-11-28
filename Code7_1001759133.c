@@ -2,17 +2,22 @@
 #include<string.h>
 #include <stdlib.h>
 #include "GameLib.h"
+#include "FileLib.h"
 #include <ctype.h>
 
-int main (void)
+int main (int argc, char *argv[])
 {
+    int ChosenArrayIndex =0;
+    char ChosenPhrase[MAX_INPUT];
+    char Mode[3] ="r+";
+    GuessSong StructArray[MAX_ENTRIES]={};
+    FILE *filehandleptr =FileOpen(argc,argv,Mode);
+    ChosenArrayIndex = StartGame(&ChosenPhrase[MAX_INPUT],filehandleptr,StructArray);
     int StrikeTracker=1;
-    char Phrase[MAX_INPUT];
+    char *Phrase=StructArray[ChosenArrayIndex].SongTitle;
     char DashedPhrase[MAX_INPUT];
     char UpperPhrase[MAX_INPUT];
-    StartGame(Phrase);
     DashIt(Phrase,DashedPhrase);
-    //uppercasing each character of phrase and storing in upperphase
     int i=0;
     int flag=0;
     char *DashFinder ="";
@@ -24,7 +29,6 @@ int main (void)
     do
     {
         LetterThereOrNot = GuessALetter(Phrase,DashedPhrase,UpperPhrase);
-        
         if(LetterThereOrNot==0)
         {
             printf("\nStrike %d", StrikeTracker);
@@ -33,12 +37,12 @@ int main (void)
         DashFinder=strchr(DashedPhrase,'-');//checking for dashes   
     }
     while (DashFinder!=NULL && StrikeTracker<=3);//checking for winner 
-    
     if(StrikeTracker<=3)
     {
         printf("You figured it out!!\n\nThe phrase was\n\n");
         printf("%s\n",Phrase);
         printf("YOU WIN!!!!\n ");
+        WriteNewFile(StructArray,ChosenArrayIndex,filehandleptr);
     }
     else
     {
@@ -46,5 +50,4 @@ int main (void)
             printf("\n\n3 STRIKES - YOU'RE OUT!!\n\nGame over");
         }
     }
-    
 }
