@@ -1,4 +1,4 @@
-## Hangman Game - Coding Assignment Summary
+## Hangman Game Project
 
 This project implements a simple Hangman game in C. The program allows users to guess letters in a randomly selected phrase, with a limited number of strikes before losing the game. The code is divided into three main files:
 
