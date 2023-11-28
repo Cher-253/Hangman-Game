@@ -2,9 +2,36 @@
 #include <string.h>
 #include <stdlib.h>
 #include "GameLib.h"
+#include "FileLib.h"
 #include <ctype.h>
 
-//check phrase function
+int StartGame(char ChosenPhrase[MAX_INPUT], FILE *filehandleptr,GuessSong StructArray[MAX_ENTRIES])
+{
+    int Recordnum=FileReader(StructArray,filehandleptr);
+    if(Recordnum==0)
+    {
+        printf("All of the games have been played-please reload file");
+        exit(0);
+    }
+    int numOfPhrases=0;
+    int i=0;
+    printf("Welcome to %d STRIKES - YOU'RE OUT - the CSE version\n\n",STRIKES);
+    printf("Please pick a movie from the following menu\n");
+    for(i=0;i<Recordnum;i++)
+    {
+        printf("%d. %s's movie that was released in %s directed by %s\n ",i+1,StructArray[i].Artist,StructArray[i].ReleaseDate,StructArray[i].AlbumName);
+    }
+    int choicePhrase =0;
+    printf("\nEnter choice : ");
+    scanf("%d",&choicePhrase);
+    while(choicePhrase<0 || choicePhrase>Recordnum)
+    {
+        printf("\nYou entered an invalid choice.\n Please reenter ");
+        scanf("%d",&choicePhrase);
+    }
+    return choicePhrase-1;
+}
+
 void CheckPhrase(char *Phrase)
 {
     char *FirstOccur;
@@ -18,7 +45,6 @@ void CheckPhrase(char *Phrase)
 
 void DashIt(char *Phrase,char DashPhrase[])
 {
-    //copy phrase to dashphrase and uppercase it
     int i;
     for(i=0;i<MAX_INPUT;i++)
     {
@@ -26,7 +52,6 @@ void DashIt(char *Phrase,char DashPhrase[])
     }
     char alphas[] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
     char *AlphaOccur = strpbrk(DashPhrase,alphas);
-    //Replacing with dashes
     while(AlphaOccur)
     {
         i = 0;
@@ -38,43 +63,10 @@ void DashIt(char *Phrase,char DashPhrase[])
             }
             i++;
         }
-        AlphaOccur = strpbrk(DashPhrase,alphas);       
+        AlphaOccur = strpbrk(DashPhrase,alphas);   
     }
 }
 
-void StartGame(char ChosenPhrase[MAX_INPUT])
-{
-    #include "PhraseBank.txt"
-    int numOfPhrases=0;
-    printf("Welcome to %d STRIKES - YOU'RE OUT - the CSE version\n\n",STRIKES);
-    printf("Please pick a phrase from the following menu\n");
-    int i =0;
-    while(PhraseBank[i]!="")
-    {
-        char DashPhrase[MAX_INPUT];
-        CheckPhrase(PhraseBank[i]);
-        DashIt(PhraseBank[i],DashPhrase);
-        i++;
-        printf("%d.\t%s\n", i, DashPhrase);
-
-    }
-    numOfPhrases=i;
-    //taking choice of phrase 
-    int choicePhrase =0;
-    printf("\nEnter choice : ");
-    scanf("%d",&choicePhrase);
-    while(choicePhrase<0 || choicePhrase>i)
-    {
-        printf("\nWrong choice. Please enter again");
-        printf("\nEnter choice : ");
-        scanf("%d",&choicePhrase);
-    }
-    //verifying if user entered menu choice is valid and within the range of your menu
-    i=0;
-    strcpy(ChosenPhrase,PhraseBank[choicePhrase-1]);
-}
-
-//function GuessALetter
 int GuessALetter(char Phrase[MAX_INPUT],char DashedPhrase[MAX_INPUT],char UpperPhrase[MAX_INPUT])
 {
     char Guess;
@@ -82,26 +74,22 @@ int GuessALetter(char Phrase[MAX_INPUT],char DashedPhrase[MAX_INPUT],char UpperP
     char UpperPhraseCopy[MAX_INPUT];
     int FoundALetter =0;
     int distance =0;
-    //Use strcpy()to copy UpperPhrase into GuessALetterCopy.
-    strcpy(UpperPhraseCopy,UpperPhrase);//destination,argument to be copied
-    //print dashed Phrase
+    strcpy(UpperPhraseCopy,UpperPhrase);
     printf("\n\n%s", DashedPhrase); 
     printf("\n\nGuess a letter : ");
     scanf(" %c",&Guess);
-    Guess = toupper(Guess);
-    
+    Guess = toupper(Guess);    
     //Use strchr()to find Guess in UpperPhraseCopy and store the pointer in FindGuess.
     FindGuess = strchr(UpperPhraseCopy,Guess);//storing pointer in FINDGUESS
     while(FindGuess!=NULL)
     {
         FoundALetter=1;
         //Use pointer arithmetic to find the distance between FindGuess and UpperPhraseCopy
-        distance =abs(FindGuess - UpperPhraseCopy);
+        distance =labs(FindGuess - UpperPhraseCopy);
         //Use that distance to  set the element in DashedPhrase to that same element from Phrase. 
         DashedPhrase[distance] = Phrase[distance];
         UpperPhraseCopy[distance] = '-';
         FindGuess = strchr(UpperPhraseCopy,Guess);
     }
-
     return FoundALetter;
 }
