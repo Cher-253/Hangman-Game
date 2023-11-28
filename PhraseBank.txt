@@ -1,6 +1,10 @@
-
-char *PhraseBank[] = {"Show me the money","Just keep swimming", "Why so serious?","May the Force be with you", "E T phone home", "Bond James Bond.", "Keep your friends close, but your enemies closer", "Elementary, my dear Watson", "You're gonna need a bigger boat", "I'm king of the world!", ""};
- 
-
-
-
+Al Pacino|The GodFather|1972|Francis Ford Coppola
+Christian Bale|The Dark Knight|2008|Christopher Nolan
+Tom Hanks|Forrest Gump|1994|Robert Zemeckis
+Morgan Freeman|The Shawshank Redemption|1994|Frank Darabont
+Liam Neeson|Schindler's List|1993|Steven Spielberg
+Russel Crowe|Gladiator|2000|Ridley Scott
+Linda Blair|The Exorcist|1973|William Friedkin
+Carrie Fisher|Star Wars:A New Hope|1977|George Lucas
+Robert Downey Jr|Avengers:Endgame|2019|Joe Russo
+Arnold Schwarzenegger|The Terminator|1984|James Cameron
