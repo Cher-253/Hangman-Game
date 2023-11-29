@@ -2,7 +2,7 @@
 
 This project implements a simple Hangman game in C. The program allows users to guess letters in a randomly selected phrase, with a limited number of strikes before losing the game. The game reads phrase information from a file, and the player guesses letters to uncover the phrase. The project is organized into several files: The code is divided into three main files:
 
-Code5_1.c:
+Code7_1.c:
 The main program file that orchestrates the Hangman game.
 Initializes variables, generates a random phrase, and prompts users for letter guesses.
 Tracks strikes and ends the game based on the predefined maximum number of strikes.  
@@ -27,7 +27,7 @@ Key Features:
 --> After successfully guessing a phrase, the file is updated, removing the guessed phrase for subsequent games.  
 
 Makefile:
-The provided makefile compiles the Code5_1.c and GameLib.c files, creating an executable named Code5_1.e.
+The provided makefile compiles the Code7_1.c and GameLib.c files, creating an executable named Code7_1.e.
 Dependencies and compilation steps are organized in the makefile for easy maintenance.
 
 Instructions:  
